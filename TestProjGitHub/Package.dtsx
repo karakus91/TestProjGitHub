@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="8/8/2019 9:04:01 AM"
@@ -11,9 +11,428 @@
   DTS:LocaleID="1031"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionGUID="{3640DC9F-B42A-41C7-8FFB-B8D5C8556EF2}">
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{9E708F55-153D-4C6F-8FA0-CB138466ABCD}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel-Verbindungs-Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{21D5A467-B401-45E2-A306-087BBDF634EF}"
+      DTS:ObjectName="Excel-Verbindungs-Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=\\intranet.wagnersystems.org\IT\BI_Import_Files\BI_Excel_Listen\Beispiel_produktsliste.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[targit-test.TEST]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{8714C10B-057B-47EE-A676-4D601589C8DD}"
+      DTS:ObjectName="targit-test.TEST">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=targit-test;Initial Catalog=TEST;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
   <DTS:Variables />
-  <DTS:Executables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DF_Excel_Import"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Datenflusstask"
+      DTS:DTSID="{0FC16154-B561-47BF-A3B8-93CBF7B2AAB4}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DF_Excel_Import"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DF_Excel_Import\Excel-Quelle"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel-Quelle;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;1"
+              description="Excel-Quelle"
+              name="Excel-Quelle"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert &quot;0&quot; zeigt einen unendlichen Timeoutwert an."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                  name="OpenRowset">Tabelle1$</property>
+                <property
+                  dataType="System.String"
+                  description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Der auszuführende SQL-Befehl."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Die Variable, die den auszuführenden SQL-Befehl enthält."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="Die Zuordnung von Parametern im SQL-Befehl zu Variablen."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Excel_Import\Excel-Quelle.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel-Verbindungs-Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel-Verbindungs-Manager]"
+                  description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Ausgabe der Excel-Quelle]"
+                  name="Ausgabe der Excel-Quelle">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Ausgabe der Excel-Quelle].Columns[Artikelnummer]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Ausgabe der Excel-Quelle].ExternalColumns[Artikelnummer]"
+                      lineageId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Ausgabe der Excel-Quelle].Columns[Artikelnummer]"
+                      name="Artikelnummer"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Ausgabe der Excel-Quelle].Columns[Artikelname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Ausgabe der Excel-Quelle].ExternalColumns[Artikelname]"
+                      length="255"
+                      lineageId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Ausgabe der Excel-Quelle].Columns[Artikelname]"
+                      name="Artikelname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Ausgabe der Excel-Quelle].Columns[Status]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Konvertierung"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Ausgabe der Excel-Quelle].ExternalColumns[Status]"
+                      length="255"
+                      lineageId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Ausgabe der Excel-Quelle].Columns[Status]"
+                      name="Status"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Ausgabe der Excel-Quelle].ExternalColumns[Artikelnummer]"
+                      dataType="r8"
+                      name="Artikelnummer" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Ausgabe der Excel-Quelle].ExternalColumns[Artikelname]"
+                      dataType="wstr"
+                      length="255"
+                      name="Artikelname" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Ausgabe der Excel-Quelle].ExternalColumns[Status]"
+                      dataType="wstr"
+                      length="255"
+                      name="Status" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Fehlerausgabe der Excel-Quelle]"
+                  isErrorOut="true"
+                  name="Fehlerausgabe der Excel-Quelle">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Fehlerausgabe der Excel-Quelle].Columns[Artikelnummer]"
+                      dataType="r8"
+                      lineageId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Fehlerausgabe der Excel-Quelle].Columns[Artikelnummer]"
+                      name="Artikelnummer" />
+                    <outputColumn
+                      refId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Fehlerausgabe der Excel-Quelle].Columns[Artikelname]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Fehlerausgabe der Excel-Quelle].Columns[Artikelname]"
+                      name="Artikelname" />
+                    <outputColumn
+                      refId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Fehlerausgabe der Excel-Quelle].Columns[Status]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Fehlerausgabe der Excel-Quelle].Columns[Status]"
+                      name="Status" />
+                    <outputColumn
+                      refId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Fehlerausgabe der Excel-Quelle].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Fehlerausgabe der Excel-Quelle].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Fehlerausgabe der Excel-Quelle].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Fehlerausgabe der Excel-Quelle].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_Excel_Import\OLE DB-Ziel"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB-Ziel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;4"
+              description="OLE DB-Ziel"
+              name="OLE DB-Ziel"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert &quot;0&quot; zeigt einen unendlichen Timeoutwert an."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                  name="OpenRowset">[dbo].[Test_BeispielListe]</property>
+                <property
+                  dataType="System.String"
+                  description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Der auszuführende SQL-Befehl."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Zeigt an, ob die für Identitätsspalten übergebenen Werte zum Ziel kopiert werden. Bei &quot;False&quot; werden die Werte für Identitätsspalten am Ziel automatisch generiert. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Zeigt an, ob für Spalten, die NULL enthalten, NULL am Ziel eingefügt wird. Bei &quot;False&quot; werden für Spalten, die NULL enthalten, am Ziel die Standardwerte eingefügt. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Gibt die für die Option &quot;Schnelles Laden&quot; zu verwendenden Optionen an. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Gibt an, wann beim Einfügen von Daten Commits ausgegeben werden. Der Wert &quot;0&quot; gibt an, dass ein Commit am Ende des Einfügens von Daten ausgegeben wird. Trifft nur zu, wenn die Option &quot;Schnelles Laden&quot; aktiviert ist."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_Excel_Import\OLE DB-Ziel.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[targit-test.TEST]"
+                  connectionManagerRefId="Package.ConnectionManagers[targit-test.TEST]"
+                  description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]"
+                  errorOrTruncationOperation="Einfügen"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Eingabe des OLE DB-Ziels">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[Artikelnummer]"
+                      cachedDataType="r8"
+                      cachedName="Artikelnummer"
+                      externalMetadataColumnId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[Artikelnummer]"
+                      lineageId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Ausgabe der Excel-Quelle].Columns[Artikelnummer]" />
+                    <inputColumn
+                      refId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[Artikelname]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Artikelname"
+                      externalMetadataColumnId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[Artikelname]"
+                      lineageId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Ausgabe der Excel-Quelle].Columns[Artikelname]" />
+                    <inputColumn
+                      refId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[Status]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Status"
+                      externalMetadataColumnId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[Status]"
+                      lineageId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Ausgabe der Excel-Quelle].Columns[Status]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[Artikelnummer]"
+                      dataType="i4"
+                      name="Artikelnummer" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[Artikelname]"
+                      dataType="wstr"
+                      length="255"
+                      name="Artikelname" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[Status]"
+                      dataType="wstr"
+                      length="255"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[shop]"
+                      dataType="wstr"
+                      length="10"
+                      name="shop" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[Preis]"
+                      dataType="i4"
+                      name="Preis" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Excel_Import\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Fehlerausgabe des OLE DB-Ziels"
+                  synchronousInputId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Excel_Import\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Excel_Import\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Excel_Import\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Excel_Import\OLE DB-Ziel.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DF_Excel_Import.Paths[Ausgabe der Excel-Quelle]"
+              endId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]"
+              name="Ausgabe der Excel-Quelle"
+              startId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Ausgabe der Excel-Quelle]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Dieser CDATA-Abschnitt enthält die Layoutinformationen des Pakets, z.B. Informationen wie X-/Y-Koordinaten, Breite und Höhe.-->
+<!--Wenn Sie diesen Abschnitt manuell ändern und Ihnen ein Fehler unterläuft, können Sie ihn löschen. -->
+<!--Das Paket kann zwar weiterhin normal geladen werden, aber frühere Layoutinformationen gehen verloren, und die Elemente auf der Entwurfsoberfläche werden vom Designer automatisch neu angeordnet.-->
+<Objects
+  Version="8">
+  <!--Jeder darunter liegende Knoten enthält Eigenschaften, die sich nicht auf das Laufzeitverhalten auswirken.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="160,42"
+          Id="Package\DF_Excel_Import"
+          TopLeft="848,363" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DF_Excel_Import">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="135,42"
+          Id="Package\DF_Excel_Import\OLE DB-Ziel"
+          TopLeft="840,375" />
+        <NodeLayout
+          Size="137,42"
+          Id="Package\DF_Excel_Import\Excel-Quelle"
+          TopLeft="844,280" />
+        <EdgeLayout
+          Id="Package\DF_Excel_Import.Paths[Ausgabe der Excel-Quelle]"
+          TopLeft="910,322">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53"
+              Start="0,0"
+              End="0,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DF_Excel_Import\Excel-Quelle">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DF_Excel_Import\OLE DB-Ziel">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
