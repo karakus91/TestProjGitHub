@@ -11,8 +11,8 @@
   DTS:LocaleID="1031"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="3"
-  DTS:VersionGUID="{35CBC121-1FFC-4ED5-A8F5-26A7B7025C09}">
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{31059743-8BA9-43FF-9A27-9DA231793583}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -65,6 +65,13 @@
                   refId="Package\DF_Excel_Import\Abgeleitete Spalte.Inputs[Eingabe der abgeleiteten Spalte]"
                   description="Eingabe der Transformation für abgeleiteten Spalten"
                   name="Eingabe der abgeleiteten Spalte">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF_Excel_Import\Abgeleitete Spalte.Inputs[Eingabe der abgeleiteten Spalte].Columns[Artikelnummer]"
+                      cachedDataType="r8"
+                      cachedName="Artikelnummer"
+                      lineageId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Ausgabe der Excel-Quelle].Columns[Artikelnummer]" />
+                  </inputColumns>
                   <externalMetadataColumns />
                 </input>
               </inputs>
@@ -97,6 +104,28 @@
                           description="Angezeigter Ausdruck für abgeleitete Spalte"
                           expressionType="Notify"
                           name="FriendlyExpression">"shop_de"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DF_Excel_Import\Abgeleitete Spalte.Outputs[Ausgabe der abgeleiteten Spalte].Columns[Preis]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Berechnung"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DF_Excel_Import\Abgeleitete Spalte.Outputs[Ausgabe der abgeleiteten Spalte].Columns[Preis]"
+                      name="Preis"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Ausdruck für abgeleitete Spalte"
+                          name="Expression">#{Package\DF_Excel_Import\Excel-Quelle.Outputs[Ausgabe der Excel-Quelle].Columns[Artikelnummer]} * 50</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Angezeigter Ausdruck für abgeleitete Spalte"
+                          expressionType="Notify"
+                          name="FriendlyExpression">Artikelnummer * 50</property>
                       </properties>
                     </outputColumn>
                   </outputColumns>
@@ -366,6 +395,12 @@
                       cachedName="shop"
                       externalMetadataColumnId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[shop]"
                       lineageId="Package\DF_Excel_Import\Abgeleitete Spalte.Outputs[Ausgabe der abgeleiteten Spalte].Columns[shop]" />
+                    <inputColumn
+                      refId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[Preis]"
+                      cachedDataType="r8"
+                      cachedName="Preis"
+                      externalMetadataColumnId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[Preis]"
+                      lineageId="Package\DF_Excel_Import\Abgeleitete Spalte.Outputs[Ausgabe der abgeleiteten Spalte].Columns[Preis]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -521,7 +556,7 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DF_Excel_Import\Excel-Quelle">
+    design-time-name="Package\DF_Excel_Import\OLE DB-Ziel">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -534,7 +569,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\DF_Excel_Import\OLE DB-Ziel">
+    design-time-name="Package\DF_Excel_Import\Excel-Quelle">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
