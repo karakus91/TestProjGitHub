@@ -11,8 +11,8 @@
   DTS:LocaleID="1031"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="2"
-  DTS:VersionGUID="{9E708F55-153D-4C6F-8FA0-CB138466ABCD}">
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{35CBC121-1FFC-4ED5-A8F5-26A7B7025C09}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -53,6 +53,80 @@
         <pipeline
           version="1">
           <components>
+            <component
+              refId="Package\DF_Excel_Import\Abgeleitete Spalte"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Abgeleitete Spalte;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;0"
+              description="Erstellt neue Spaltenwerte, indem Ausdrücke auf Transformationseingabespalten angewendet werden. Erstellen Sie neue Spalten, oder überschreiben Sie vorhandene. Verketten Sie beispielsweise die Werte der Spalten &quot;first name&quot; und &quot;last name&quot;, um die Spalte &quot;full name&quot; zu erhalten."
+              name="Abgeleitete Spalte"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DF_Excel_Import\Abgeleitete Spalte.Inputs[Eingabe der abgeleiteten Spalte]"
+                  description="Eingabe der Transformation für abgeleiteten Spalten"
+                  name="Eingabe der abgeleiteten Spalte">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_Excel_Import\Abgeleitete Spalte.Outputs[Ausgabe der abgeleiteten Spalte]"
+                  description="Standardausgabe der Transformation für abgeleitete Spalten"
+                  exclusionGroup="1"
+                  name="Ausgabe der abgeleiteten Spalte"
+                  synchronousInputId="Package\DF_Excel_Import\Abgeleitete Spalte.Inputs[Eingabe der abgeleiteten Spalte]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Excel_Import\Abgeleitete Spalte.Outputs[Ausgabe der abgeleiteten Spalte].Columns[shop]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Berechnung"
+                      errorRowDisposition="FailComponent"
+                      length="7"
+                      lineageId="Package\DF_Excel_Import\Abgeleitete Spalte.Outputs[Ausgabe der abgeleiteten Spalte].Columns[shop]"
+                      name="shop"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Ausdruck für abgeleitete Spalte"
+                          name="Expression">"shop_de"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Angezeigter Ausdruck für abgeleitete Spalte"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"shop_de"</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DF_Excel_Import\Abgeleitete Spalte.Outputs[Fehlerausgabe der abgeleiteten Spalte]"
+                  description="Fehlerausgabe der Transformation für abgeleitete Spalten"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Fehlerausgabe der abgeleiteten Spalte"
+                  synchronousInputId="Package\DF_Excel_Import\Abgeleitete Spalte.Inputs[Eingabe der abgeleiteten Spalte]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_Excel_Import\Abgeleitete Spalte.Outputs[Fehlerausgabe der abgeleiteten Spalte].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_Excel_Import\Abgeleitete Spalte.Outputs[Fehlerausgabe der abgeleiteten Spalte].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_Excel_Import\Abgeleitete Spalte.Outputs[Fehlerausgabe der abgeleiteten Spalte].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_Excel_Import\Abgeleitete Spalte.Outputs[Fehlerausgabe der abgeleiteten Spalte].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
             <component
               refId="Package\DF_Excel_Import\Excel-Quelle"
               componentClassID="Microsoft.ExcelSource"
@@ -285,6 +359,13 @@
                       cachedName="Status"
                       externalMetadataColumnId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[Status]"
                       lineageId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Ausgabe der Excel-Quelle].Columns[Status]" />
+                    <inputColumn
+                      refId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[shop]"
+                      cachedDataType="wstr"
+                      cachedLength="7"
+                      cachedName="shop"
+                      externalMetadataColumnId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[shop]"
+                      lineageId="Package\DF_Excel_Import\Abgeleitete Spalte.Outputs[Ausgabe der abgeleiteten Spalte].Columns[shop]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -342,8 +423,13 @@
           </components>
           <paths>
             <path
-              refId="Package\DF_Excel_Import.Paths[Ausgabe der Excel-Quelle]"
+              refId="Package\DF_Excel_Import.Paths[Ausgabe der abgeleiteten Spalte]"
               endId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels]"
+              name="Ausgabe der abgeleiteten Spalte"
+              startId="Package\DF_Excel_Import\Abgeleitete Spalte.Outputs[Ausgabe der abgeleiteten Spalte]" />
+            <path
+              refId="Package\DF_Excel_Import.Paths[Ausgabe der Excel-Quelle]"
+              endId="Package\DF_Excel_Import\Abgeleitete Spalte.Inputs[Eingabe der abgeleiteten Spalte]"
               name="Ausgabe der Excel-Quelle"
               startId="Package\DF_Excel_Import\Excel-Quelle.Outputs[Ausgabe der Excel-Quelle]" />
           </paths>
@@ -374,7 +460,7 @@
     design-time-name="Package\DF_Excel_Import">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="135,42"
           Id="Package\DF_Excel_Import\OLE DB-Ziel"
@@ -382,21 +468,47 @@
         <NodeLayout
           Size="137,42"
           Id="Package\DF_Excel_Import\Excel-Quelle"
-          TopLeft="844,280" />
+          TopLeft="831,191" />
+        <NodeLayout
+          Size="164,42"
+          Id="Package\DF_Excel_Import\Abgeleitete Spalte"
+          TopLeft="823,293" />
         <EdgeLayout
           Id="Package\DF_Excel_Import.Paths[Ausgabe der Excel-Quelle]"
-          TopLeft="910,322">
+          TopLeft="902.25,233">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,53"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,45.5">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,45.5" />
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DF_Excel_Import.Paths[Ausgabe der abgeleiteten Spalte]"
+          TopLeft="906.25,335">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40"
+              Start="0,0"
+              End="0,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
