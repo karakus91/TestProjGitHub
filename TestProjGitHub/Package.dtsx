@@ -7,12 +7,12 @@
   DTS:CreatorName="INTRANET\m.martinez"
   DTS:DTSID="{E25337CC-A8A3-4630-B291-F5A6BF6C86B5}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="14.0.3002.113"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
   DTS:LocaleID="1031"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="5"
-  DTS:VersionGUID="{E9A2BC6E-1A75-40D0-A988-366C5610370D}">
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{DD80F735-8F8E-4F60-9EBA-86D80964E42F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -151,6 +151,29 @@
                           name="FriendlyExpression">"Dies ist ein Test"</property>
                       </properties>
                     </outputColumn>
+                    <outputColumn
+                      refId="Package\DF_Excel_Import\Abgeleitete Spalte.Outputs[Ausgabe der abgeleiteten Spalte].Columns[Bezeichung]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Berechnung"
+                      errorRowDisposition="FailComponent"
+                      length="7"
+                      lineageId="Package\DF_Excel_Import\Abgeleitete Spalte.Outputs[Ausgabe der abgeleiteten Spalte].Columns[Bezeichung]"
+                      name="Bezeichung"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Ausdruck für abgeleitete Spalte"
+                          name="Expression">"Name_" + (DT_WSTR,2)#{Package\DF_Excel_Import\Excel-Quelle.Outputs[Ausgabe der Excel-Quelle].Columns[Artikelnummer]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Angezeigter Ausdruck für abgeleitete Spalte"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"Name_" + (DT_WSTR,2)Artikelnummer</property>
+                      </properties>
+                    </outputColumn>
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -204,7 +227,7 @@
                   dataType="System.String"
                   description="Der auszuführende SQL-Befehl."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                 <property
                   dataType="System.String"
                   description="Die Variable, die den auszuführenden SQL-Befehl enthält."
@@ -344,7 +367,7 @@
                   dataType="System.String"
                   description="Der auszuführende SQL-Befehl."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                 <property
                   dataType="System.Int32"
                   description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
@@ -431,6 +454,13 @@
                       cachedName="Bemerkung"
                       externalMetadataColumnId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[Bemerkung]"
                       lineageId="Package\DF_Excel_Import\Abgeleitete Spalte.Outputs[Ausgabe der abgeleiteten Spalte].Columns[Bemerkung]" />
+                    <inputColumn
+                      refId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[Bezeichung]"
+                      cachedDataType="wstr"
+                      cachedLength="7"
+                      cachedName="Bezeichung"
+                      externalMetadataColumnId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[Bezeichnung]"
+                      lineageId="Package\DF_Excel_Import\Abgeleitete Spalte.Outputs[Ausgabe der abgeleiteten Spalte].Columns[Bezeichung]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -462,6 +492,11 @@
                       dataType="wstr"
                       length="50"
                       name="Bemerkung" />
+                    <externalMetadataColumn
+                      refId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[Bezeichnung]"
+                      dataType="wstr"
+                      length="50"
+                      name="Bezeichnung" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -532,39 +567,17 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="164,42"
-          Id="Package\DF_Excel_Import\Abgeleitete Spalte"
-          TopLeft="823,293" />
+          Size="135,42"
+          Id="Package\DF_Excel_Import\OLE DB-Ziel"
+          TopLeft="840,375" />
         <NodeLayout
           Size="137,42"
           Id="Package\DF_Excel_Import\Excel-Quelle"
           TopLeft="831,191" />
         <NodeLayout
-          Size="135,42"
-          Id="Package\DF_Excel_Import\OLE DB-Ziel"
-          TopLeft="840,375" />
-        <EdgeLayout
-          Id="Package\DF_Excel_Import.Paths[Ausgabe der Excel-Quelle]"
-          TopLeft="902.25,233">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          Size="164,42"
+          Id="Package\DF_Excel_Import\Abgeleitete Spalte"
+          TopLeft="823,293" />
         <EdgeLayout
           Id="Package\DF_Excel_Import.Paths[Ausgabe der abgeleiteten Spalte]"
           TopLeft="906.25,335">
@@ -587,11 +600,33 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DF_Excel_Import.Paths[Ausgabe der Excel-Quelle]"
+          TopLeft="902.25,233">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DF_Excel_Import\Excel-Quelle">
+    design-time-name="Package\DF_Excel_Import\OLE DB-Ziel">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -604,7 +639,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\DF_Excel_Import\OLE DB-Ziel">
+    design-time-name="Package\DF_Excel_Import\Excel-Quelle">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
