@@ -11,8 +11,8 @@
   DTS:LocaleID="1031"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="6"
-  DTS:VersionGUID="{DD80F735-8F8E-4F60-9EBA-86D80964E42F}">
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{532A33FF-222D-4A95-B155-995E7B6BDE96}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -133,7 +133,7 @@
                       dataType="wstr"
                       errorOrTruncationOperation="Berechnung"
                       errorRowDisposition="FailComponent"
-                      length="17"
+                      length="35"
                       lineageId="Package\DF_Excel_Import\Abgeleitete Spalte.Outputs[Ausgabe der abgeleiteten Spalte].Columns[Bemerkung]"
                       name="Bemerkung"
                       truncationRowDisposition="FailComponent">
@@ -142,13 +142,13 @@
                           containsID="true"
                           dataType="System.String"
                           description="Ausdruck für abgeleitete Spalte"
-                          name="Expression">"Dies ist ein Test"</property>
+                          name="Expression">"Dies ist ein Test kdfjgkjdfhgkdfhgi"</property>
                         <property
                           containsID="true"
                           dataType="System.String"
                           description="Angezeigter Ausdruck für abgeleitete Spalte"
                           expressionType="Notify"
-                          name="FriendlyExpression">"Dies ist ein Test"</property>
+                          name="FriendlyExpression">"Dies ist ein Test kdfjgkjdfhgkdfhgi"</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
@@ -450,7 +450,7 @@
                     <inputColumn
                       refId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].Columns[Bemerkung]"
                       cachedDataType="wstr"
-                      cachedLength="17"
+                      cachedLength="35"
                       cachedName="Bemerkung"
                       externalMetadataColumnId="Package\DF_Excel_Import\OLE DB-Ziel.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[Bemerkung]"
                       lineageId="Package\DF_Excel_Import\Abgeleitete Spalte.Outputs[Ausgabe der abgeleiteten Spalte].Columns[Bemerkung]" />
@@ -567,6 +567,10 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="164,42"
+          Id="Package\DF_Excel_Import\Abgeleitete Spalte"
+          TopLeft="823,293" />
+        <NodeLayout
           Size="135,42"
           Id="Package\DF_Excel_Import\OLE DB-Ziel"
           TopLeft="840,375" />
@@ -574,32 +578,6 @@
           Size="137,42"
           Id="Package\DF_Excel_Import\Excel-Quelle"
           TopLeft="831,191" />
-        <NodeLayout
-          Size="164,42"
-          Id="Package\DF_Excel_Import\Abgeleitete Spalte"
-          TopLeft="823,293" />
-        <EdgeLayout
-          Id="Package\DF_Excel_Import.Paths[Ausgabe der abgeleiteten Spalte]"
-          TopLeft="906.25,335">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,40"
-              Start="0,0"
-              End="0,32.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,32.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <EdgeLayout
           Id="Package\DF_Excel_Import.Paths[Ausgabe der Excel-Quelle]"
           TopLeft="902.25,233">
@@ -614,6 +592,28 @@
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DF_Excel_Import.Paths[Ausgabe der abgeleiteten Spalte]"
+          TopLeft="906.25,335">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40"
+              Start="0,0"
+              End="0,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
